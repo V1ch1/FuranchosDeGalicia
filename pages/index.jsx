@@ -27,7 +27,9 @@ export default function Index({
         <main>
             <Banner isHome={true} />
             <section className="container mx-auto mt-[50px] px-2">
-                <h2 className="text-3xl text-gray-800">Explora destinos</h2>
+                <h2 className="text-3xl text-gray-800">
+                    Localiza por municipios
+                </h2>
                 <Slider arrows={true} autoplay={false}>
                     {municipalitiesPlaces.map((place, index) => (
                         <figure
@@ -56,9 +58,13 @@ export default function Index({
                                 <p className="text-lg font-semibold text-white m-0">
                                     {place.furanchos} Furanchos
                                 </p>
-                                <p className="text-lg font-semibold text-white m-0">
-                                    {place.tabernas} Tabernas
-                                </p>
+                                {popularTabernas.length != 0 ? (
+                                    <p className="text-lg font-semibold text-white m-0">
+                                        {place.tabernas} Tabernas
+                                    </p>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </figure>
                     ))}
@@ -114,7 +120,7 @@ export async function getServerSideProps(context) {
         let municipalitiesPlaces = [];
         municipalitiesList.forEach((value) =>
             municipalitiesPlaces.push({
-                img: "/images/places/paris.jpg",
+                img: "/images/places/taberna2.webp",
                 name: value,
                 furanchos: places.filter(
                     (place) =>

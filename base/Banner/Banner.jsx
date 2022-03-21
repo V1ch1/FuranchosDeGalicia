@@ -62,12 +62,12 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
                     <div className="container mx-auto lg:max-w-[970px] xl:max-w-[1140px]">
                         <div className="container mx-auto bg-white rounded-lg p-[30px]">
                             <h2 className="text-3xl mb-[10px]">
-                                Latest reviews. Lowest prices.
+                                Descubre los mejores furanchos y tabernas de
+                                Galicia{" "}
                             </h2>
                             <p className="text-[15px] mb-0">
-                                compares prices from 200+ booking sites to help
-                                you find the lowest price on the right hotel for
-                                you.
+                                Compara entre más de 400 furanchos y tabernas.
+                                Regístrate, guarda tus favoritos y valóralos.
                             </p>
                             <Formik
                                 initialValues={initialValuesSearch}
@@ -80,7 +80,7 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
                                                 type="text"
                                                 name="search"
                                                 className="appearance-none w-full h-[55px] text-lg text-gray-700 outline-none bg-transparent px-4 py-2"
-                                                placeholder="Buscar..."
+                                                placeholder="Busca por nombre, localidad, provincia..."
                                             />
                                             <button
                                                 aria-label="Submit"

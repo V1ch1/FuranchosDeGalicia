@@ -216,16 +216,18 @@ export default function PlaceDetails() {
                                 />
                             </svg>
                         ))}
-                    <p className="text-black m-0 ml-2 font-semibold">
+                    <p className="m-0 ml-2 font-semibold">
                         {place.rating === 0
                             ? "Sin opiniones"
-                            : place.rating < 3
+                            : place.rating < 2
                             ? "Mal"
-                            : place.rating === 3
-                            ? "Promedio"
+                            : place.rating < 3
+                            ? "Regular"
+                            : place.rating < 5
+                            ? "Bien"
                             : place.rating === 5
-                            ? "Asombroso"
-                            : "Bueno"}
+                            ? "Excelente"
+                            : "Excelente"}
                         {!!place.reviews
                             ? place.reviews.length <= 0
                                 ? ""
@@ -295,11 +297,6 @@ export default function PlaceDetails() {
             >
                 <div className="flex flex-col items-center pb-[30px] mb-[50px] border-b-[1px] border-gray-300 sm:flex-row sm:justify-between">
                     <div className="mb-2 w-full inline-flex items-center justify-between sm:w-fit">
-                        <h2 className="text-2xl sm:text-3xl m-0 mr-2 ">
-                            {place.reviews && place.reviews.length > 0
-                                ? `${place.reviews.length} Opiniones`
-                                : "Sin opiniones"}
-                        </h2>
                         <div className="flex">
                             {Array(5)
                                 .fill(0)
@@ -325,6 +322,11 @@ export default function PlaceDetails() {
                                     </svg>
                                 ))}
                         </div>
+                        <h4 className="text-1xl sm:text-1xl m-0 mr-2 ml-3">
+                            {place.reviews && place.reviews.length > 0
+                                ? `${place.reviews.length} Opiniones`
+                                : "Sin opiniones"}
+                        </h4>
                     </div>
                     <div className="w-full flex justify-end sm:w-fit">
                         <button
