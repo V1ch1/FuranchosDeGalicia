@@ -1,0 +1,32 @@
+@tailwind base;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: "Lato", sans-serif;
+    }
+
+    .banner {
+        @apply flex justify-center items-center w-full h-[100vh] bg-no-repeat bg-cover brightness-90;
+    }
+
+    .filters .ant-btn {
+        @apply h-[35px] rounded-[4px] ml-2;
+    }
+
+    .filters-mobile {
+        @apply top-[157px] overflow-y-scroll;
+        height: calc(100% - 157px);
+    }
+
+    .filters-mobile .ant-radio-group {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;

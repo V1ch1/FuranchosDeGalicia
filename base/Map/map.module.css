@@ -1,0 +1,5 @@
+.map {
+    @apply fixed w-full top-[152px] md:w-[40%] md:right-0 md:col-span-1 md:right-0 md:z-10;
+
+    height: calc(100% - 152px);
+}

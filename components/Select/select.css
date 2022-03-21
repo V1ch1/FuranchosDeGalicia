@@ -1,0 +1,16 @@
+/* .select ul {
+    scrollbar-width: thin;
+} */
+
+.select ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+.select ul::-webkit-scrollbar-track {
+    border-radius: 20px;
+}
+
+.select ul::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 20px;
+}
