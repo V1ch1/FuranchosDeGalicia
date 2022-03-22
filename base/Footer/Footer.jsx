@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import style from "./footer.module.css";
 
 export default function Footer({ areThereTabernas }) {
@@ -7,9 +8,12 @@ export default function Footer({ areThereTabernas }) {
             className={`text-gray-600 pt-[50px] mt-[75px] flex flex-col items-center h-[250px] ${style.footer}`}
         >
             <Link href="/" scroll={false}>
-                <span className="text-brand-blue text-xl font-bold cursor-pointer md:text-2xl hover:text-blue-500">
-                    FuranchosDeGalicia
-                </span>
+                <div className="inline-flex cursor-pointer">
+                    <Image width={35} height={35} src="/images/logo.svg" />
+                    <span className="text-brand-blue text-xl font-bold ml-2 md:text-2xl hover:text-blue-500">
+                        FuranchosDeGalicia
+                    </span>
+                </div>
             </Link>
             <div className="flex justify-center mt-6">
                 <Link href="/furanchos">

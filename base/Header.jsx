@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,15 +80,30 @@ export default function Header({ isHome, areThereTabernas }) {
             <div className="flex justify-between w-full h-[82px] md:items-center">
                 <div className="h-full flex items-center">
                     <Link href="/">
-                        <span
-                            className={`${
-                                isTop && isHome
-                                    ? "text-white"
-                                    : "text-brand-blue hover:text-blue-500"
-                            } hidden md:block text-xl font-semibold md:text-2xl cursor-pointer`}
-                        >
-                            FuranchosEnGalicia
-                        </span>
+                        <div className="inline-flex cursor-pointer">
+                            {isTop && isHome ? (
+                                <Image
+                                    width={35}
+                                    height={35}
+                                    src="/images/logo-white.svg"
+                                />
+                            ) : (
+                                <Image
+                                    width={35}
+                                    height={35}
+                                    src="/images/logo.svg"
+                                />
+                            )}
+                            <span
+                                className={`${
+                                    isTop && isHome
+                                        ? "text-white"
+                                        : "text-brand-blue hover:text-blue-500"
+                                } hidden text-xl font-semibold ml-2 md:text-2xl md:block`}
+                            >
+                                FuranchosEnGalicia
+                            </span>
+                        </div>
                     </Link>
                     {(!isHome || (!isTop && isSearchVisible)) && (
                         <Formik
