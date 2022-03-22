@@ -27,7 +27,10 @@ export default function Index({
     return (
         <main>
             <Head>
-                <title>Furanchos en Galicia</title>
+                <title>
+                    Furanchos en Galicia - Descubre los mejores furanchos y
+                    tabernas
+                </title>
                 <meta
                     name="viewport"
                     content="initial-scale=1.0, width=device-width"
