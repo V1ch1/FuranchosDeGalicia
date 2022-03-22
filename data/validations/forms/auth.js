@@ -21,3 +21,9 @@ export const validationSchemaSignIn = Yup.object({
         .required("* Requerido."),
     password: Yup.string().required("* Requerido."),
 });
+
+export const validationResetPassword = Yup.object({
+    email: Yup.string()
+        .email("* El correo no tiene un formato válido.")
+        .required("* Requerido."),
+});

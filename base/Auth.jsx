@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../redux/actions/auth";
-import { signIn, signUp } from "../data/api/auth/services";
+import { resetPassword, signIn, signUp } from "../data/api/auth/services";
 import {
+    validationResetPassword,
     validationSchemaSignIn,
     validationSchemaSignUp,
 } from "../data/validations/forms/auth";
@@ -19,10 +20,15 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
     const { isAuthenticated } = useSelector((state) => state.auth);
 
     //sates for ui management
-    const [showRegister, setShowRegister] = useState(false);
+    const [showMenu, setShowMenu] = useState({
+        register: false,
+        resetPassword: false,
+    });
     const [loginError, setLoginError] = useState(false);
     const [registerError, setRegisterError] = useState(false);
     const [registerDone, setRegisterDone] = useState(false);
+    const [resetPasswordError, setResetPasswordError] = useState(false);
+    const [resetPasswordDone, setResetPasswordDone] = useState(false);
 
     useEffect(async () => {
         //login user if jwt is active
@@ -65,6 +71,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
         terms: false,
     };
 
+    const initialValuesResetPassword = {
+        email: "",
+    };
+
     const handleSignIn = async (values) => {
         const response = await signIn(values);
 
@@ -87,13 +97,27 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
         dispatch(hideAuth());
     };
 
+    const handleResetPassword = async (values) => {
+        const response = await resetPassword(values);
+
+        if (!response?.error) {
+            setResetPasswordError(false);
+            setResetPasswordDone(
+                "Su nueva contraseña ha sido enviada a su correo.",
+            );
+        } else {
+            setResetPasswordDone(false);
+            setResetPasswordError(response.error);
+        }
+    };
+
     const handleSignUp = async (values) => {
         const response = await signUp(values);
 
         if (!response?.error) {
             setRegisterError(false);
             setRegisterDone(
-                "Congratulations your account has been successfully created. Now you can sign in.",
+                "Felicitaciones su cuenta ha sido creada correctamente. Ahora puede entrar.",
             );
         } else {
             setRegisterDone(false);
@@ -105,6 +129,8 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
         setLoginError(false);
         setRegisterError(false);
         setRegisterDone(false);
+        setResetPasswordDone(false);
+        setResetPasswordError(false);
     };
 
     const handleLogout = () => {
@@ -134,7 +160,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                 : "text-black hover:text-brand-blue"
                         }`}
                         onClick={() => {
-                            setShowRegister(false);
+                            setShowMenu({
+                                register: false,
+                                resetPassword: false,
+                            });
                             dispatch(showAuth());
                         }}
                     >
@@ -143,7 +172,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                     <div
                         className="bg-brand-blue order-3 text-white text-[16px] font-semibold py-2 px-3 rounded select-none hover:bg-blue-700 cursor-pointer"
                         onClick={() => {
-                            setShowRegister(true);
+                            setShowMenu({
+                                register: true,
+                                resetPassword: false,
+                            });
                             dispatch(showAuth());
                         }}
                     >
@@ -161,7 +193,8 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                 {/* Sign in form */}
                 <div
                     className={`flex items-center bg-white ${
-                        showRegister && "hidden"
+                        (showMenu.register || showMenu.resetPassword) &&
+                        "hidden"
                     } `}
                 >
                     <div className="container mx-auto">
@@ -234,11 +267,30 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                 Entrar
                                             </button>
                                             <p className="text-sm text-center text-gray-400">
-                                                No tienes una cuenta aún?
+                                                Olvidaste tu contraseña?{" "}
                                                 <span
                                                     className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
                                                     onClick={() => {
-                                                        setShowRegister(true);
+                                                        setShowMenu({
+                                                            register: false,
+                                                            resetPassword: true,
+                                                        });
+                                                        cleanFeedback();
+                                                    }}
+                                                >
+                                                    Reestablécela
+                                                </span>
+                                                .
+                                            </p>
+                                            <p className="text-sm text-center text-gray-400">
+                                                No tienes una cuenta aún?{" "}
+                                                <span
+                                                    className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
+                                                    onClick={() => {
+                                                        setShowMenu({
+                                                            register: true,
+                                                            resetPassword: false,
+                                                        });
                                                         cleanFeedback();
                                                     }}
                                                 >
@@ -256,7 +308,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                 {/* Sign up form */}
                 <div
                     className={`flex items-center bg-white ${
-                        !showRegister && "hidden"
+                        !showMenu.register && "hidden"
                     } `}
                 >
                     <div className="container mx-auto">
@@ -385,11 +437,104 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                 Registrarse
                                             </button>
                                             <p className="text-sm text-center text-gray-400">
-                                                Ya tienes una cuenta?
+                                                Ya tienes una cuenta?{" "}
                                                 <span
                                                     className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
                                                     onClick={() => {
-                                                        setShowRegister(false);
+                                                        setShowMenu({
+                                                            register: false,
+                                                            resetPassword: false,
+                                                        });
+                                                        cleanFeedback();
+                                                    }}
+                                                >
+                                                    Entra
+                                                </span>
+                                                .
+                                            </p>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className={`flex items-center bg-white ${
+                        !showMenu.resetPassword && "hidden"
+                    } `}
+                >
+                    <div className="container mx-auto">
+                        <div className="mx-auto">
+                            <div className="text-center">
+                                <h1 className="my-3 text-3xl font-semibold text-gray-700">
+                                    Reiniciar contraseña
+                                </h1>
+                                <p className="text-gray-500">
+                                    Escriba su correo para reiniciar su
+                                    contraseña
+                                </p>
+                            </div>
+                            <div className="m-7">
+                                <Formik
+                                    initialValues={initialValuesResetPassword}
+                                    onSubmit={handleResetPassword}
+                                    validationSchema={validationResetPassword}
+                                >
+                                    {(formik) => (
+                                        <Form>
+                                            {resetPasswordError && (
+                                                <h6 className="flex text-red-600 mb-4">
+                                                    <img
+                                                        className="h-6 w-6 mr-2"
+                                                        src="/icons/error.svg"
+                                                        alt="Error"
+                                                    />
+                                                    {resetPasswordError}
+                                                </h6>
+                                            )}
+                                            {resetPasswordDone && (
+                                                <h6 className="flex text-green-600 mb-4">
+                                                    <img
+                                                        className="h-6 w-6 mr-2"
+                                                        src="/icons/check.svg"
+                                                        alt="Error"
+                                                    />
+                                                    {resetPasswordDone}
+                                                </h6>
+                                            )}
+                                            <div className="mb-4">
+                                                <label className="block mb-1 text-sm text-gray-600">
+                                                    Correo
+                                                </label>
+                                                <ErrorMessage
+                                                    className="text-xs text-red-600"
+                                                    name="email"
+                                                    component="span"
+                                                />
+                                                <Field
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="usuario@ejemplo.com"
+                                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
+                                                />
+                                            </div>
+                                            <button
+                                                aria-label="Submit"
+                                                className="text-xl w-full text-white bg-blue-500 px-3 py-3 mb-6 rounded-md hover:bg-blue-400 focus:bg-blue-600 focus:outline-none"
+                                                type="submit"
+                                            >
+                                                Enviar
+                                            </button>
+                                            <p className="text-sm text-center text-gray-400">
+                                                Ya tienes una cuenta?{" "}
+                                                <span
+                                                    className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
+                                                    onClick={() => {
+                                                        setShowMenu({
+                                                            register: false,
+                                                            resetPassword: false,
+                                                        });
                                                         cleanFeedback();
                                                     }}
                                                 >

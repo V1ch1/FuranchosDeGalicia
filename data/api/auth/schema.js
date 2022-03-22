@@ -15,3 +15,12 @@ export const LOGIN_QUERY = ({ email, password }) => {
         password: password,
     });
 };
+
+export const RESET_PASSWORD_QUERY = ({ email }) => {
+    return axios.post(
+        `${process.env.NEXT_PUBLIC_API_SERVER}/auth/reset-password/`,
+        {
+            correo: email,
+        },
+    );
+};
