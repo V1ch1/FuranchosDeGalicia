@@ -7,6 +7,7 @@ import { getAppProps } from "./_app";
 import _ from "lodash";
 import { useDispatch } from "react-redux";
 import { filterByMunicipality } from "../redux/actions/places";
+import Head from "next/head";
 
 export default function Index({
     isConnected,
@@ -25,6 +26,17 @@ export default function Index({
 
     return (
         <main>
+            <Head>
+                <title>Furanchos en Galicia</title>
+                <meta
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
+                />
+                <meta
+                    name="description"
+                    content="Descubre los mejores furanchos y tabernas en Galicia"
+                ></meta>
+            </Head>
             <Banner isHome={true} />
             <section className="container mx-auto mt-[50px] px-2">
                 <h2 className="text-3xl text-gray-800">

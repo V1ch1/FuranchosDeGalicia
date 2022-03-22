@@ -86,7 +86,7 @@ export default function Header({ isHome, areThereTabernas }) {
                                     : "text-brand-blue hover:text-blue-500"
                             } hidden md:block text-xl font-semibold md:text-2xl cursor-pointer`}
                         >
-                            FuranchosDeGalicia
+                            FuranchosEnGalicia
                         </span>
                     </Link>
                     {(!isHome || (!isTop && isSearchVisible)) && (
