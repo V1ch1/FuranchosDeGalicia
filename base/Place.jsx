@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { stringToSlug } from "../lib/utils";
 import { setCurrentPlace } from "../redux/actions/places";
 import { updateFavorites } from "../data/api/user/services";
 import Image from "next/image";
@@ -15,15 +14,13 @@ export default function Place({ place, favorite }) {
     const [isFavorite, setIsFavorite] = useState(favorite);
     const { isAuthenticated, user, token } = useSelector((state) => state.auth);
 
-    const placePath = `/place/${stringToSlug(place.nombre)}`;
-
     const goToPlace = () => {
         dispatch(setCurrentPlace({ ...place, favorite }));
         localStorage.setItem(
             "currentPlace",
             JSON.stringify({ ...place, favorite }),
         );
-        router.push(placePath);
+        router.push("/place");
     };
 
     const toggleFavorite = async () => {

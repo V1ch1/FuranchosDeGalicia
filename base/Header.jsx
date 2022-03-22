@@ -81,25 +81,22 @@ export default function Header({ isHome, areThereTabernas }) {
                 <div className="h-full flex items-center">
                     <Link href="/">
                         <div className="inline-flex cursor-pointer">
-                            {isTop && isHome ? (
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    src="/images/logo-white.svg"
-                                />
-                            ) : (
-                                <Image
-                                    width={35}
-                                    height={35}
-                                    src="/images/logo.svg"
-                                />
-                            )}
+                            <Image
+                                width={30}
+                                height={30}
+                                layout="fixed"
+                                src={`/images/${
+                                    isTop && isHome ? "logo-white" : "logo"
+                                }.svg`}
+                            />
                             <span
                                 className={`${
                                     isTop && isHome
                                         ? "text-white"
-                                        : "text-brand-blue hover:text-blue-500"
-                                } hidden text-xl font-semibold ml-2 md:text-2xl md:block`}
+                                        : `${
+                                              isHome ? "" : "hidden sm:block"
+                                          } text-brand-blue hover:text-blue-500`
+                                } text-xl font-semibold ml-2 md:text-2xl`}
                             >
                                 FuranchosEnGalicia
                             </span>
@@ -112,7 +109,11 @@ export default function Header({ isHome, areThereTabernas }) {
                         >
                             {(formik) => (
                                 <Form>
-                                    <div className="flex border-[1px] rounded bg-gray-100 md:m-5 hover:border-brand-blue">
+                                    <div
+                                        className={`${
+                                            isHome ? "hidden md:flex" : "flex"
+                                        } ml-4 mr-2 border-[1px] rounded bg-gray-100 md:m-5 hover:border-brand-blue`}
+                                    >
                                         <Field
                                             type="text"
                                             name="search"
