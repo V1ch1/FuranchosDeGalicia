@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import style from "./footer.module.css";
 
 export default function Footer({ areThereTabernas }) {
     return (
         <footer
-            className={`text-gray-600 pt-[50px] mt-[75px] flex flex-col items-center h-[250px] ${style.footer}`}
+            className={`text-gray-600 pt-[50px] mt-[75px] flex flex-col items-center h-[250px] `}
         >
             <Link href="/" scroll={false}>
                 <div className="inline-flex cursor-pointer">
@@ -15,10 +14,25 @@ export default function Footer({ areThereTabernas }) {
                     </span>
                 </div>
             </Link>
-            <div className="flex justify-center mt-6">
-                <Link href="/furanchos">
+            <div className="flex flex-wrap justify-center mt-6">
+                <Link href="/aviso-legal">
                     <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
-                        Furanchos
+                        Aviso Legal
+                    </span>
+                </Link>
+                <Link href="/politica-privacidad">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Política de Privacidad{" "}
+                    </span>
+                </Link>
+                <Link href="/cookies">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Política de Cookies{" "}
+                    </span>
+                </Link>
+                <Link href="/contact">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Contacto
                     </span>
                 </Link>
                 {areThereTabernas && (

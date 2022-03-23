@@ -214,6 +214,23 @@ export default function Header({ isHome, areThereTabernas }) {
                         >
                             Furanchos
                         </span>
+                        <span
+                            onClick={() => {
+                                dispatch(hideMenu());
+                                router.push("/contact");
+                            }}
+                            className={`flex order-2 items-center mt-10 text-[16px] px-2 cursor-pointer lg:mx-4 lg:my-0 lg:order-[initial] ${
+                                isTop && isHome
+                                    ? `${
+                                          isMenuOpen
+                                              ? "text-black hover:text-brand-blue"
+                                              : "text-white"
+                                      }`
+                                    : "text-black hover:text-brand-blue"
+                            }`}
+                        >
+                            Contacto
+                        </span>
                         {areThereTabernas && (
                             <span
                                 onClick={() => {

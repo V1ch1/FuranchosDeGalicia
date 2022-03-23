@@ -12,6 +12,7 @@ import Modal from "../components/Modal/Modal";
 import { useSelector } from "react-redux";
 import { getUserInfo } from "../data/api/user/services";
 import { hideAuth, showAuth } from "../redux/actions/ui";
+import Link from "next/link";
 
 export default function Auth({ isTop, isHome, isMenuOpen }) {
     const ref = useRef();
@@ -150,6 +151,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
             ) : (
                 <div className="flex">
                     <div
+<<<<<<< HEAD
                         className={`flex order-2 items-center text-lg px-2 cursor-pointer lg:mx-4 lg:my-0 lg:order-[initial] ${
                             isTop && isHome
                                 ? `${
@@ -170,6 +172,8 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                         Entrar
                     </div>
                     <div
+=======
+>>>>>>> da6e191bae8fe6d9ab7b3088da1fe52f8b5a3e2c
                         className="bg-brand-blue order-3 text-white text-[16px] font-semibold py-2 px-3 rounded select-none hover:bg-blue-700 cursor-pointer"
                         onClick={() => {
                             setShowMenu({
@@ -179,7 +183,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                             dispatch(showAuth());
                         }}
                     >
-                        Registrarse
+                        Acceder
                     </div>
                 </div>
             )}
@@ -420,7 +424,12 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                         name="terms"
                                                     />
                                                     <label className="text-sm text-gray-600 ml-2">
-                                                        Términos y condiciones
+                                                        Acepto la
+                                                        <a href="/politica-privacidad">
+                                                            {" "}
+                                                            Política de
+                                                            Privacidad{" "}
+                                                        </a>
                                                     </label>
                                                 </div>
                                                 <ErrorMessage

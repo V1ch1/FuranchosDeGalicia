@@ -181,7 +181,7 @@ export default function Furanchos({ places, provinces, municipalities }) {
                                 aria-label="Cancel filters"
                                 onClick={clearFilters}
                             >
-                                Reset
+                                Limpiar filtros
                             </Button>
                         </div>
                         <div className="filters sm:hidden">
@@ -286,7 +286,7 @@ export default function Furanchos({ places, provinces, municipalities }) {
                             </div>
                         </div>
                         <label className="font-bold mx-2">
-                            Show Map
+                            Ver furanchos en Mapa{" "}
                             <input
                                 type="checkbox"
                                 checked={isMapVisible}

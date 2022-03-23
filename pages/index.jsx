@@ -24,6 +24,8 @@ export default function Index({
         router.push("/places");
     };
 
+    console.log(municipalitiesPlaces);
+
     return (
         <main>
             <Head>
@@ -42,9 +44,7 @@ export default function Index({
             </Head>
             <Banner isHome={true} />
             <section className="container mx-auto mt-[50px] px-2">
-                <h2 className="text-3xl text-gray-800">
-                    Localiza por municipios
-                </h2>
+                <h2 className="text-3xl text-gray-800">Busca por municipios</h2>
                 <Slider arrows={true} autoplay={false}>
                     {municipalitiesPlaces.map((place, index) => (
                         <figure
@@ -135,7 +135,7 @@ export async function getServerSideProps(context) {
         let municipalitiesPlaces = [];
         municipalitiesList.forEach((value) =>
             municipalitiesPlaces.push({
-                img: "/images/places/taberna2.webp",
+                img: `/images/municipality/${value}.jpg`,
                 name: value,
                 furanchos: places.filter(
                     (place) =>
