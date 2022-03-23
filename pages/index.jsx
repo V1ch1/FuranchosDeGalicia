@@ -135,7 +135,7 @@ export async function getServerSideProps(context) {
         let municipalitiesPlaces = [];
         municipalitiesList.forEach((value) =>
             municipalitiesPlaces.push({
-                img: "/images/places/taberna2.webp",
+                img: `/images/municipality/${value}.jpg`,
                 name: value,
                 furanchos: places.filter(
                     (place) =>
