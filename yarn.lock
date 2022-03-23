@@ -2464,7 +2464,7 @@ rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.2:
 
 react-cookie-consent@^7.3.1:
   version "7.3.1"
-  resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-7.3.1.tgz#f256ce890abaa60cb0ad25287eaac1cdbbb4cae1"
+  resolved "http://nexus.uclv.edu.cu/repository/npm/react-cookie-consent/-/react-cookie-consent-7.3.1.tgz#f256ce890abaa60cb0ad25287eaac1cdbbb4cae1"
   integrity sha512-05usKig0YYy6OLfBlQBIQk/TTi8h3PUGvs218kPO5bAb4f7D0UTjC3N1zG2UAVWFYbiI0QWyG0s3bkh2sfiW3Q==
   dependencies:
     js-cookie "^2.2.1"

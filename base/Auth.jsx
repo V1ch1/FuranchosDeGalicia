@@ -151,29 +151,6 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
             ) : (
                 <div className="flex">
                     <div
-<<<<<<< HEAD
-                        className={`flex order-2 items-center text-lg px-2 cursor-pointer lg:mx-4 lg:my-0 lg:order-[initial] ${
-                            isTop && isHome
-                                ? `${
-                                      isMenuOpen
-                                          ? "text-black hover:text-brand-blue"
-                                          : "text-white"
-                                  }`
-                                : "text-black hover:text-brand-blue"
-                        }`}
-                        onClick={() => {
-                            setShowMenu({
-                                register: false,
-                                resetPassword: false,
-                            });
-                            dispatch(showAuth());
-                        }}
-                    >
-                        Entrar
-                    </div>
-                    <div
-=======
->>>>>>> da6e191bae8fe6d9ab7b3088da1fe52f8b5a3e2c
                         className="bg-brand-blue order-3 text-white text-[16px] font-semibold py-2 px-3 rounded select-none hover:bg-blue-700 cursor-pointer"
                         onClick={() => {
                             setShowMenu({
