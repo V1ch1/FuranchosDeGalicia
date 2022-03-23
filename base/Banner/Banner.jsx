@@ -29,7 +29,7 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
             className={`relative banner_section ${className ? className : ""}`}
             {...props}
         >
-            <Carousel>
+            <Carousel autoplay>
                 <div className="banner relative">
                     <Image
                         className="object-cover object-center w-full h-full block"
@@ -63,7 +63,7 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
                         <div className="container mx-auto bg-white rounded-lg p-[30px]">
                             <h2 className="text-3xl mb-[10px]">
                                 Descubre los mejores furanchos y tabernas de
-                                Galicia{" "}
+                                Galicia
                             </h2>
                             <p className="text-[15px] mb-0">
                                 Compara entre más de 400 furanchos y tabernas.

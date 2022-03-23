@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,15 +80,27 @@ export default function Header({ isHome, areThereTabernas }) {
             <div className="flex justify-between w-full h-[82px] md:items-center">
                 <div className="h-full flex items-center">
                     <Link href="/">
-                        <span
-                            className={`${
-                                isTop && isHome
-                                    ? "text-white"
-                                    : "text-brand-blue hover:text-blue-500"
-                            } hidden md:block text-xl font-semibold md:text-2xl cursor-pointer`}
-                        >
-                            FuranchosEnGalicia
-                        </span>
+                        <div className="inline-flex cursor-pointer">
+                            <Image
+                                width={30}
+                                height={30}
+                                layout="fixed"
+                                src={`/images/${
+                                    isTop && isHome ? "logo-white" : "logo"
+                                }.svg`}
+                            />
+                            <span
+                                className={`${
+                                    isTop && isHome
+                                        ? "text-white"
+                                        : `${
+                                              isHome ? "" : "hidden sm:block"
+                                          } text-brand-blue hover:text-blue-500`
+                                } text-xl font-semibold ml-2 md:text-2xl`}
+                            >
+                                FuranchosEnGalicia
+                            </span>
+                        </div>
                     </Link>
                     {(!isHome || (!isTop && isSearchVisible)) && (
                         <Formik
@@ -96,7 +109,11 @@ export default function Header({ isHome, areThereTabernas }) {
                         >
                             {(formik) => (
                                 <Form>
-                                    <div className="flex border-[1px] rounded bg-gray-100 md:m-5 hover:border-brand-blue">
+                                    <div
+                                        className={`${
+                                            isHome ? "hidden md:flex" : "flex"
+                                        } ml-4 mr-2 border-[1px] rounded bg-gray-100 md:m-5 hover:border-brand-blue`}
+                                    >
                                         <Field
                                             type="text"
                                             name="search"
