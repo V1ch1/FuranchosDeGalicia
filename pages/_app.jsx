@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
                 {!["/furanchos", "/tabernas"].includes(router.pathname) && (
                     <Footer areThereTabernas={areThereTabernas} />
                 )}
-                {/* <CookieConsent
+                <CookieConsent
                     location="bottom"
                     buttonText="Aceptar"
                     cookieName="myAwesomeCookieName2"
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
                     Asumiremos que estás de acuerdo con esto, pero puedes optar
                     por no hacerlo si lo deseas. Leer{" "}
                     <a href="/cookies"> Política de Cookies. </a>
-                </CookieConsent> */}
+                </CookieConsent>
             </Provider>
         </>
     );
