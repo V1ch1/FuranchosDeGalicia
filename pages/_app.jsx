@@ -58,6 +58,7 @@ export async function getAppProps() {
 
     const places = data.map((place, _, array) => {
         // fake data for development
+
         place.imagenes = "/images/places/taberna1.webp";
 
         //-----real rating logic---------

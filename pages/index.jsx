@@ -24,6 +24,8 @@ export default function Index({
         router.push("/places");
     };
 
+    console.log(municipalitiesPlaces);
+
     return (
         <main>
             <Head>
