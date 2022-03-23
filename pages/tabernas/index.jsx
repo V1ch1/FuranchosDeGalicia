@@ -284,7 +284,7 @@ export default function Tabernas({ places, provinces, municipalities }) {
                             </div>
                         </div>
                         <label className="font-bold mx-2">
-                            Show Map
+                            Ver en Mapa{" "}
                             <input
                                 type="checkbox"
                                 checked={isMapVisible}
