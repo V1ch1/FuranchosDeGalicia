@@ -28,17 +28,27 @@ export default function index({ places }) {
 
     return (
         <main className="container mx-auto mt-[100px] px-2 lg:px-8">
-            <h2 className="text-3xl pb-[50px] text-gray-800">
-                Resultado de la búsqueda:
-            </h2>
             {filteredPlaces && filteredPlaces.length > 0 ? (
-                <Places
-                    places={
-                        searchString || municipality ? filteredPlaces : places
-                    }
-                />
+                <>
+                    <h2 className="text-3xl pb-[50px] text-gray-800">
+                        Resultado de la búsqueda:
+                    </h2>
+                    <Places
+                        places={
+                            searchString || municipality
+                                ? filteredPlaces
+                                : places
+                        }
+                    />
+                </>
             ) : (
-                <Places places={places} />
+                <>
+                    <h2 className="text-3xl pb-[50px] text-gray-800">
+                        No hay resultados para la búsqueda, pero le sugerimos
+                        estos furanchos:
+                    </h2>
+                    <Places places={places} />
+                </>
             )}
         </main>
     );
