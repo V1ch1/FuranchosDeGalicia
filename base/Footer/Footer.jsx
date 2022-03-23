@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import style from "./footer.module.css";
 
 export default function Footer({ areThereTabernas }) {
     return (
         <footer
-            className={`text-gray-600 pt-[50px] mt-[75px] flex flex-col items-center h-[250px] ${style.footer}`}
+            className={`text-gray-600 pt-[50px] mt-[75px] flex flex-col items-center h-[250px] `}
         >
             <Link href="/" scroll={false}>
                 <div className="inline-flex cursor-pointer">
