@@ -42,9 +42,7 @@ export default function Index({
             </Head>
             <Banner isHome={true} />
             <section className="container mx-auto mt-[50px] px-2">
-                <h2 className="text-3xl text-gray-800">
-                    Localiza por municipios
-                </h2>
+                <h2 className="text-3xl text-gray-800">Busca por municipios</h2>
                 <Slider arrows={true} autoplay={false}>
                     {municipalitiesPlaces.map((place, index) => (
                         <figure

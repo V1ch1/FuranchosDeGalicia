@@ -11,10 +11,25 @@ export default function Footer({ areThereTabernas }) {
                     FuranchosDeGalicia
                 </span>
             </Link>
-            <div className="flex justify-center mt-6">
+            <div className="flex flex-wrap justify-center mt-6">
+                <Link href="/aviso-legal">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Aviso Legal
+                    </span>
+                </Link>
+                <Link href="/politica-privacidad">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Política de Privacidad{" "}
+                    </span>
+                </Link>
+                <Link href="/cookies">
+                    <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        Política de Cookies{" "}
+                    </span>
+                </Link>
                 <Link href="/furanchos">
                     <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
-                        Furanchos
+                        Contacto
                     </span>
                 </Link>
                 {areThereTabernas && (
