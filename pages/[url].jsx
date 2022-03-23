@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { Rate } from "antd";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import GoogleMaps from "../../base/Map/Map";
-import Banner from "../../base/Banner/Banner";
+import GoogleMaps from "../base/Map/Map";
+import Banner from "../base/Banner/Banner";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postComment, updateFavorites } from "../../data/api/user/services";
-import Modal from "../../components/Modal/Modal";
-import { validationSchemaReview } from "../../data/validations/forms/reviews";
-import { login } from "../../redux/actions/auth";
-import { showAuth, showMenu } from "../../redux/actions/ui";
+import { postComment, updateFavorites } from "../data/api/user/services";
+import Modal from "../components/Modal/Modal";
+import { validationSchemaReview } from "../data/validations/forms/reviews";
+import { login } from "../redux/actions/auth";
+import { showAuth, showMenu } from "../redux/actions/ui";
 import _ from "lodash";
+import Gallery from "../base/Gallery/Gallery";
 
 export default function PlaceDetails() {
     const ref = useRef();
@@ -135,7 +136,7 @@ export default function PlaceDetails() {
 
     return (
         <main>
-            <Banner ref={ref} autoPlay />
+            <Gallery ref={ref} />
             <div
                 className={`${
                     isTop ? "sticky z-10 top-[82px]" : ""
@@ -275,12 +276,14 @@ export default function PlaceDetails() {
                 }`}
             >
                 <h2 className="text-3xl">Localización</h2>
-                <a
-                    href={`https://maps.google.com/?ll=${place.GPS.lat},${place.GPS.lng}&z=19`}
-                    target="_blank"
-                >
-                    Abrir en Google Maps
-                </a>
+                {place.GPS && (
+                    <a
+                        href={`https://maps.google.com/?ll=${place.GPS.lat},${place.GPS.lng}&z=19`}
+                        target="_blank"
+                    >
+                        Abrir en Google Maps
+                    </a>
+                )}
                 <p>
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry's

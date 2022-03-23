@@ -1,10 +1,10 @@
 import React from "react";
+import Image from "next/image";
 import { Carousel } from "antd";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { searchPlace } from "../../redux/actions/places";
-import Image from "next/image";
 import "antd/dist/antd.css";
 
 const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {

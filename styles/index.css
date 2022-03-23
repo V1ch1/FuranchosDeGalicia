@@ -1,7 +1,7 @@
 @import "./fonts";
 @import "./tailwind";
-@import "../base/Banner/banner.css";
 @import "../components/Select/select.css";
+@import "../base/Gallery/gallery.css";
 
 #_next {
     overflow: hidden;
@@ -15,4 +15,26 @@
 .no_scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+/* antd carousel */
+.ant-carousel .slick-dots li {
+    width: 5px !important;
+    height: 5px !important;
+    margin: 0 5px !important;
+    @apply shadow-2xl;
+}
+
+.ant-carousel .slick-dots li.slick-active {
+    width: 28px !important;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    border-radius: 8px !important;
+}
+
+.ant-carousel .slick-dots li button {
+    height: 100% !important;
+    width: 100% !important;
+    border-radius: 50% !important;
 }
