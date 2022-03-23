@@ -31,7 +31,7 @@ export default function Footer({ areThereTabernas }) {
                         Política de Cookies{" "}
                     </span>
                 </Link>
-                <Link href="/furanchos">
+                <Link href="/contact">
                     <span className="flex font-semibold items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
                         Contacto
                     </span>
