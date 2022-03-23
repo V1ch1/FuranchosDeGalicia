@@ -191,7 +191,7 @@ export default function PlaceDetails() {
                 }`}
             >
                 <p className="text-gray-500 mb-0">
-                    {place.direccion},{place.municipio},{place.provincia}
+                    {place.direccion}, {place.municipio}, {place.provincia}
                 </p>
                 <h2 className="text-3xl">{place.nombre}</h2>
                 <div className="flex items-center">
@@ -275,6 +275,12 @@ export default function PlaceDetails() {
                 }`}
             >
                 <h2 className="text-3xl">Localización</h2>
+                <a
+                    href={`https://maps.google.com/?ll=${place.GPS.lat},${place.GPS.lng}&z=19`}
+                    target="_blank"
+                >
+                    Abrir en Google Maps
+                </a>
                 <p>
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry's

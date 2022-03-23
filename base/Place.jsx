@@ -8,7 +8,7 @@ import { login } from "../redux/actions/auth";
 import { showAuth, showMenu } from "../redux/actions/ui";
 import _ from "lodash";
 
-export default function Place({ place, favorite }) {
+export default function Place({ place, favorite, inMap = false }) {
     const dispatch = useDispatch();
     const router = useRouter();
     const [isFavorite, setIsFavorite] = useState(favorite);
@@ -91,15 +91,23 @@ export default function Place({ place, favorite }) {
             <div className="p-[15px]">
                 <div>
                     <p className="text-gray-400 text-[13px] overflow-hidden whitespace-nowrap text-ellipsis mb-0">
-                        {place.direccion}
+                        {place.direccion}, {place.municipio}
                     </p>
                     <h2
-                        className="text-gray-900 overflow-hidden whitespace-nowrap text-ellipsis text-lg font-medium cursor-pointer"
+                        className="text-gray-900 mb-0 overflow-hidden whitespace-nowrap text-ellipsis text-lg font-medium cursor-pointer"
                         onClick={() => goToPlace()}
                     >
                         {place.nombre}
                     </h2>
-                    <div className="flex items-center">
+                    {inMap && (
+                        <a
+                            href={`https://maps.google.com/?ll=${place.GPS.lat},${place.GPS.lng}&z=19`}
+                            target="_blank"
+                        >
+                            Abrir en Google Maps
+                        </a>
+                    )}
+                    <div className="flex items-center mt-2">
                         {Array(5)
                             .fill(0)
                             .map((value, index) => (

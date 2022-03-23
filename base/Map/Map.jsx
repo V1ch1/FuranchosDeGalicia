@@ -61,6 +61,7 @@ const RegularMap = withScriptjs(
                                                     favorite={user?.favoritos.includes(
                                                         place.uid,
                                                     )}
+                                                    inMap={true}
                                                 />
                                             </Modal>
                                         </div>

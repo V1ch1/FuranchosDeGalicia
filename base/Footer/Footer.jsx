@@ -10,7 +10,7 @@ export default function Footer({ areThereTabernas }) {
                 <div className="inline-flex cursor-pointer">
                     <Image width={30} height={30} src="/images/logo.svg" />
                     <span className="text-brand-blue text-xl font-bold ml-2 md:text-2xl hover:text-blue-500">
-                        FuranchosDeGalicia
+                        FuranchosEnGalicia
                     </span>
                 </div>
             </Link>
@@ -44,7 +44,7 @@ export default function Footer({ areThereTabernas }) {
                 )}
             </div>
             <p className="text-gray-500 text-[16px] mt-4">
-                Copyright @ 2022 FuranchosDeGalicia, Inc.
+                Copyright @ 2022 FuranchosEnGalicia, Inc.
             </p>
         </footer>
     );
