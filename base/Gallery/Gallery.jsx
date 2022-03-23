@@ -13,7 +13,7 @@ const Gallery = React.forwardRef(({ ...props }, ref) => {
     }, []);
 
     return (
-        <div className="gallery" ref={ref}>
+        <div className="gallery pt-[83px]" ref={ref}>
             <div className="gallery__current-image">
                 <Carousel
                     asNavFor={nav}
@@ -21,36 +21,36 @@ const Gallery = React.forwardRef(({ ...props }, ref) => {
                     dots={false}
                     ref={(carousel) => (media = carousel)}
                 >
-                    <figure className="relative w-full h-[500px]">
+                    <figure className="relative w-full h-[490px]">
                         <Image
-                            className="object-cover object-center block"
+                            className="object-cover object-center block rounded"
                             src={"/images/banner/banner1.webp"}
                             alt="Banner"
                             priority={true}
                             layout="fill"
                         />
                     </figure>
-                    <figure className="relative w-full h-[500px]">
+                    <figure className="relative w-full h-[490px]">
                         <Image
-                            className="object-cover object-center block"
+                            className="object-cover object-center block rounded"
                             src={"/images/banner/banner2.webp"}
                             alt="Banner"
                             priority={true}
                             layout="fill"
                         />
                     </figure>
-                    <figure className="relative w-full h-[500px]">
+                    <figure className="relative w-full h-[490px]">
                         <Image
-                            className="object-cover object-center block"
+                            className="object-cover object-center block rounded"
                             src={"/images/banner/banner3.webp"}
                             alt="Banner"
                             priority={true}
                             layout="fill"
                         />
                     </figure>
-                    <figure className="relative w-full h-[500px]">
+                    <figure className="relative w-full h-[490px]">
                         <Image
-                            className="object-cover object-center block"
+                            className="object-cover object-center block rounded"
                             src={"/images/banner/banner1.webp"}
                             alt="Banner"
                             priority={true}
@@ -69,36 +69,36 @@ const Gallery = React.forwardRef(({ ...props }, ref) => {
                 touchThreshold={50}
                 focusOnSelect={true}
             >
-                <figure className="relative w-full h-[160px]">
+                <figure className="relative w-full h-[150px]">
                     <Image
-                        className="object-cover object-center block"
+                        className=" object-cover object-center block rounded"
                         src={"/images/banner/banner1.webp"}
                         alt="Banner"
                         priority={true}
                         layout="fill"
                     />
                 </figure>
-                <figure className="relative w-full h-[160px]">
+                <figure className="relative w-full h-[150px]">
                     <Image
-                        className="object-cover object-center block"
+                        className=" object-cover object-center block rounded"
                         src={"/images/banner/banner2.webp"}
                         alt="Banner"
                         priority={true}
                         layout="fill"
                     />
                 </figure>
-                <figure className="relative w-full h-[160px]">
+                <figure className="relative w-full h-[150px]">
                     <Image
-                        className="object-cover object-center block"
+                        className=" object-cover object-center block rounded"
                         src={"/images/banner/banner3.webp"}
                         alt="Banner"
                         priority={true}
                         layout="fill"
                     />
                 </figure>
-                <figure className="relative w-full h-[160px]">
+                <figure className="relative w-full h-[150px]">
                     <Image
-                        className="object-cover object-center block"
+                        className="object-cover object-center block rounded"
                         src={"/images/banner/banner1.webp"}
                         alt="Banner"
                         priority={true}
