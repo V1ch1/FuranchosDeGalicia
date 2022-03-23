@@ -186,7 +186,7 @@ export default function PlaceDetails() {
             </div>
             <section
                 id="overview"
-                className={`container mx-auto px-2 md:px-[50px] xl:px-0 ${
+                className={`container mx-auto px-2 md:px-[50px] ${
                     isTop ? "pt-[150px]" : "pt-[35px]"
                 }`}
             >
@@ -243,7 +243,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="amenities"
-                className={`container mx-auto px-2 md:px-[50px] xl:px-0 ${
+                className={`container mx-auto px-2 md:px-[50px] ${
                     isTop ? "pt-[150px]" : "pt-[35px]"
                 }`}
             >
@@ -270,7 +270,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="location"
-                className={`container mx-auto px-2 md:px-[50px] xl:px-0 ${
+                className={`container mx-auto px-2 md:px-[50px] ${
                     isTop ? "pt-[150px]" : "pt-[35px]"
                 }`}
             >
@@ -291,7 +291,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="reviews"
-                className={`container mx-auto px-1 md:px-[50px] xl:px-0 ${
+                className={`container mx-auto px-1 md:px-[50px] ${
                     isTop ? "pt-[150px]" : "pt-[35px]"
                 }`}
             >
