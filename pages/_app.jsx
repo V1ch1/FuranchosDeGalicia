@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { getPlacesList } from "../data/api/places/services";
 import "../styles/index.css";
 import CookieConsent from "react-cookie-consent";
+import TagManager from "react-gtm-module";
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
@@ -20,6 +21,10 @@ function MyApp({ Component, pageProps }) {
         areThereTabernas = places.some(
             (place) => place.categoria.toLowerCase() === "taberna",
         );
+    }, []);
+
+    useEffect(() => {
+        TagManager.initialize({ gtmId: "GTM-W33K4MG" });
     }, []);
 
     return (
