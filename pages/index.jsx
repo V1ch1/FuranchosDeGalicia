@@ -68,9 +68,16 @@ export default function Index({
                                 <h3 className="text-white text-2xl font-semibold">
                                     {place.name}
                                 </h3>
-                                <p className="text-lg font-semibold text-white m-0">
-                                    {place.furanchos} Furanchos
-                                </p>
+                                {place.furanchos === 1 ? (
+                                    <p className="text-lg font-semibold text-white m-0">
+                                        {place.furanchos} Furancho
+                                    </p>
+                                ) : (
+                                    <p className="text-lg font-semibold text-white m-0">
+                                        {place.furanchos} Furanchos
+                                    </p>
+                                )}
+
                                 {popularTabernas.length != 0 ? (
                                     <p className="text-lg font-semibold text-white m-0">
                                         {place.tabernas} Tabernas

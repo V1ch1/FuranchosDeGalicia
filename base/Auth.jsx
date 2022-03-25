@@ -118,7 +118,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
         if (!response?.error) {
             setRegisterError(false);
             setRegisterDone(
-                "Felicitaciones su cuenta ha sido creada correctamente. Ahora puede entrar.",
+                "Enhorabuena, su cuenta ha sido creada correctamente. Ahora puede entrar.",
             );
         } else {
             setRegisterDone(false);
@@ -259,9 +259,8 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                         cleanFeedback();
                                                     }}
                                                 >
-                                                    Reestablécela
+                                                    Restablecer
                                                 </span>
-                                                .
                                             </p>
                                             <p className="text-sm text-center text-gray-400">
                                                 No tienes una cuenta aún?{" "}
@@ -295,14 +294,26 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                     <div className="container mx-auto">
                         <div className="mx-auto">
                             <div className="text-center">
-                                <h1 className="my-3 text-3xl font-semibold text-gray-700">
+                                <h1 className="my-1 text-3xl font-semibold text-gray-700">
                                     Resgistrarse
                                 </h1>
-                                <p className="text-gray-500">
-                                    Regístrate para crear una cuenta.
-                                </p>
                             </div>
-                            <div className="m-7">
+                            <p className="text-sm text-center text-gray-600">
+                                Ya tienes una cuenta?{" "}
+                                <span
+                                    className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
+                                    onClick={() => {
+                                        setShowMenu({
+                                            register: false,
+                                            resetPassword: false,
+                                        });
+                                        cleanFeedback();
+                                    }}
+                                >
+                                    Entra
+                                </span>
+                            </p>
+                            <div className="m-4">
                                 <Formik
                                     initialValues={initialValuesSignUp}
                                     onSubmit={handleSignUp}
@@ -331,9 +342,6 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                 </h6>
                                             )}
                                             <div className="mb-4">
-                                                <label className="block mb-1 text-sm text-gray-600">
-                                                    Nombre y Apellidos
-                                                </label>
                                                 <ErrorMessage
                                                     className="text-xs text-red-600"
                                                     name="name"
@@ -342,13 +350,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                 <Field
                                                     name="name"
                                                     placeholder="Nombre y Apellidos"
-                                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
+                                                    className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
                                                 />
                                             </div>
                                             <div className="mb-4">
-                                                <label className="block mb-1 text-sm text-gray-600">
-                                                    Localidad
-                                                </label>
                                                 <ErrorMessage
                                                     className="text-xs text-red-600"
                                                     name="municipality"
@@ -357,13 +362,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                 <Field
                                                     name="municipality"
                                                     placeholder="Localidad"
-                                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
+                                                    className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
                                                 />
                                             </div>
                                             <div className="mb-4">
-                                                <label className="block mb-1 text-sm text-gray-600">
-                                                    Correo
-                                                </label>
                                                 <ErrorMessage
                                                     className="text-xs text-red-600"
                                                     name="email"
@@ -373,15 +375,10 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                     type="email"
                                                     name="email"
                                                     placeholder="usuario@ejemplo.com"
-                                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
+                                                    className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
                                                 />
                                             </div>
                                             <div className="mb-4">
-                                                <div className="flex justify-between mb-1">
-                                                    <label className="text-sm text-gray-600">
-                                                        Contraseña
-                                                    </label>
-                                                </div>
                                                 <ErrorMessage
                                                     className="text-xs text-red-600"
                                                     name="password"
@@ -391,7 +388,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                                     type="password"
                                                     name="password"
                                                     placeholder="Contraseña"
-                                                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
+                                                    className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-100 focus:border-blue-300"
                                                 />
                                             </div>
                                             <div className="mb-4">
@@ -422,22 +419,6 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
                                             >
                                                 Registrarse
                                             </button>
-                                            <p className="text-sm text-center text-gray-400">
-                                                Ya tienes una cuenta?{" "}
-                                                <span
-                                                    className="text-blue-400 cursor-pointer hover:text-blue-600 focus:outline-none focus:underline focus:text-blue-500"
-                                                    onClick={() => {
-                                                        setShowMenu({
-                                                            register: false,
-                                                            resetPassword: false,
-                                                        });
-                                                        cleanFeedback();
-                                                    }}
-                                                >
-                                                    Entra
-                                                </span>
-                                                .
-                                            </p>
                                         </Form>
                                     )}
                                 </Formik>

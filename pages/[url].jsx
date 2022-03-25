@@ -241,18 +241,50 @@ function PlaceDetails(currentPlace) {
                             transform="translate(-47 -55)"
                         ></path>
                     </svg>
-                    <span className="hidden lg:block">Añadir a Favorito</span>
+                    <span className="hidden lg:block">Añadir a Favoritos</span>
                 </button>
             </div>
             <section
                 id="overview"
                 className="container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
-                <p className="text-gray-500 mb-0">
-                    {place.direccion}, {place.municipio}, {place.provincia}
-                </p>
                 <h2 className="text-3xl">{place.nombre}</h2>
-                <div className="flex items-center">
+                <div className="text-gray-500 mb-4">
+                    <img
+                        className="w-[50px] h-[25px]  "
+                        src="/icons/ubicacion.svg"
+                        alt="ubicación"
+                        style={{ float: "left" }}
+                    />{" "}
+                    {place.GPS && (
+                        <a
+                            href={`https://maps.google.com/?ll=${place.GPS.lat},${place.GPS.lng}&z=19`}
+                            target="_blank"
+                        >
+                            {place.direccion}, {place.municipio} -{" "}
+                            {place.provincia}
+                        </a>
+                    )}
+                </div>
+                {place.telefono && (
+                    <div className="text-gray-500 mb-4">
+                        <img
+                            className="w-[50px] h-[25px]  "
+                            src="/icons/telefono.svg"
+                            alt="telefono"
+                            style={{ float: "left" }}
+                        />{" "}
+                        {place.telefono && (
+                            <a
+                                href={`tel:+34${place.telefono}`}
+                                target="_blank"
+                            >
+                                {place.telefono}
+                            </a>
+                        )}
+                    </div>
+                )}
+                <div className="flex items-center ml-4">
                     {Array(5)
                         .fill(0)
                         .map((value, index) => (
@@ -305,23 +337,33 @@ function PlaceDetails(currentPlace) {
             >
                 <h2 className="text-3xl">Comodidades</h2>
                 <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    {Array(4)
-                        .fill(0)
-                        .map((value, index) => (
-                            <figure
-                                key={index}
-                                className="bg-gray-200 rounded py-6 flex flex-col items-center max-w-[250px]"
-                            >
-                                <img
-                                    className="w-[145px] h-[85px]"
-                                    src="/icons/wifi.svg"
-                                    alt="wifi"
-                                />
-                                <h4 className="text-lg font-normal pt-4">
-                                    Free Wifi
-                                </h4>
-                            </figure>
-                        ))}
+                    <figure className="bg-gray-200 rounded py-6 flex flex-col items-center max-w-[250px]">
+                        <img
+                            className="w-[145px] h-[85px]"
+                            src="/icons/wifi.svg"
+                            alt="wifi"
+                        />
+                        <h4 className="text-lg font-normal pt-4">Wifi</h4>
+                    </figure>
+                    <figure className="bg-gray-200 rounded py-6 flex flex-col items-center max-w-[250px]">
+                        <img
+                            className="w-[145px] h-[85px]"
+                            src="/icons/parque.svg"
+                            alt="parque"
+                        />
+                        <h4 className="text-lg font-normal pt-4">
+                            Parque infantil
+                        </h4>
+                    </figure>
+
+                    <figure className="bg-gray-200 rounded py-6 flex flex-col items-center max-w-[250px]">
+                        <img
+                            className="w-[145px] h-[85px]"
+                            src="/icons/coche.svg"
+                            alt="parque"
+                        />
+                        <h4 className="text-lg font-normal pt-4">Parking</h4>
+                    </figure>
                 </div>
             </section>
             <section
