@@ -118,7 +118,7 @@ export default function Auth({ isTop, isHome, isMenuOpen }) {
         if (!response?.error) {
             setRegisterError(false);
             setRegisterDone(
-                "Felicitaciones su cuenta ha sido creada correctamente. Ahora puede entrar.",
+                "Enhorabuena, su cuenta ha sido creada correctamente. Ahora puede entrar.",
             );
         } else {
             setRegisterDone(false);

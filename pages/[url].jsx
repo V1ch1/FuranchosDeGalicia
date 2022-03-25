@@ -209,19 +209,24 @@ export default function PlaceDetails() {
                         </a>
                     )}
                 </div>
-                <div className="text-gray-500 mb-4">
-                    <img
-                        className="w-[50px] h-[25px]  "
-                        src="/icons/telefono.svg"
-                        alt="telefono"
-                        style={{ float: "left" }}
-                    />{" "}
-                    {place.telefono && (
-                        <a href={`tel:+34${place.telefono}`} target="_blank">
-                            {place.telefono}
-                        </a>
-                    )}
-                </div>
+                {place.telefono && (
+                    <div className="text-gray-500 mb-4">
+                        <img
+                            className="w-[50px] h-[25px]  "
+                            src="/icons/telefono.svg"
+                            alt="telefono"
+                            style={{ float: "left" }}
+                        />{" "}
+                        {place.telefono && (
+                            <a
+                                href={`tel:+34${place.telefono}`}
+                                target="_blank"
+                            >
+                                {place.telefono}
+                            </a>
+                        )}
+                    </div>
+                )}
                 <div className="flex items-center ml-4">
                     {Array(5)
                         .fill(0)
