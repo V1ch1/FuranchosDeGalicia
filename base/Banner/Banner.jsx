@@ -18,8 +18,7 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
     const handleSearch = ({ search }) => {
         if (search.trim()) {
             dispatch(searchPlace(search));
-
-            router.push("/places");
+            router.push(`/furancho?q=${encodeURIComponent(search)}`);
         }
     };
 
@@ -81,6 +80,7 @@ const Banner = React.forwardRef(({ className, isHome, ...props }, ref) => {
                                                 name="search"
                                                 className="appearance-none w-full h-[55px] text-lg text-gray-700 outline-none bg-transparent px-4 py-2"
                                                 placeholder="Busca por nombre, localidad, provincia..."
+                                                autoComplete="off"
                                             />
                                             <button
                                                 aria-label="Submit"

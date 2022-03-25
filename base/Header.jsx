@@ -28,8 +28,7 @@ export default function Header({ isHome, areThereTabernas }) {
     const handleSearch = ({ search }) => {
         if (search.trim()) {
             dispatch(searchPlace(search));
-
-            router.push("/places");
+            router.push(`/furancho?q=${encodeURIComponent(search)}`);
         }
     };
 
@@ -119,6 +118,7 @@ export default function Header({ isHome, areThereTabernas }) {
                                             name="search"
                                             className="appearance-none w-full text-lg text-gray-700 outline-none bg-transparent px-4 py-2"
                                             placeholder="Buscar..."
+                                            autoComplete="off"
                                         />
                                         <button
                                             aria-label="Submit"

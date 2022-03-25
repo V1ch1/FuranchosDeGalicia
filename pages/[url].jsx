@@ -1,8 +1,9 @@
 import Link from "next/link";
+import DefaultErrorPage from "next/error";
+import { useRouter } from "next/router";
 import { Rate } from "antd";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import GoogleMaps from "../base/Map/Map";
-import Banner from "../base/Banner/Banner";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postComment, updateFavorites } from "../data/api/user/services";
@@ -10,10 +11,32 @@ import Modal from "../components/Modal/Modal";
 import { validationSchemaReview } from "../data/validations/forms/reviews";
 import { login } from "../redux/actions/auth";
 import { showAuth, showMenu } from "../redux/actions/ui";
-import _ from "lodash";
 import Gallery from "../base/Gallery/Gallery";
+import Places from "../base/Places";
+import { getAppProps } from "./_app";
+import _ from "lodash";
 
-export default function PlaceDetails() {
+export default function Index({ places }) {
+    const router = useRouter();
+    const { q, url } = router.query;
+
+    if (url.startsWith("furancho-")) {
+        const placeName = url.replace("furancho-", "").trim();
+        const place = places.find((place) =>
+            place.nombre.toLowerCase().includes(placeName.toLowerCase()),
+        );
+
+        if (!!place) {
+            return PlaceDetails(place);
+        }
+    } else if (url === "furancho" && !!q) {
+        return SearchPlace({ places, q });
+    }
+
+    return <DefaultErrorPage statusCode={404} />;
+}
+
+function PlaceDetails(currentPlace) {
     const ref = useRef();
     const dispatch = useDispatch();
     const [isTop, setIsTop] = useState(false);
@@ -24,12 +47,33 @@ export default function PlaceDetails() {
     const { isAuthenticated, user, token } = useSelector((state) => state.auth);
     const [isFavorite, setIsFavorite] = useState(false);
 
-    //sates for ui management
+    //sates for user response management
     const [reviewError, setReviewError] = useState(false);
     const [reviewDone, setReviewDone] = useState(false);
 
     //state for rating system track
     const [rate, setRate] = useState(5);
+
+    const [isFocused, setIsFocused] = useState("");
+
+    useEffect(() => {
+        if (!!currentPlace) {
+            setPlace(currentPlace);
+        }
+
+        localStorage.setItem(
+            "currentPlace",
+            JSON.stringify({
+                ...place,
+            }),
+        );
+    }, [place, currentPlace]);
+
+    useEffect(() => {
+        if (user && user.favoritos.includes(place.uid)) {
+            setIsFavorite(true);
+        }
+    }, [user]);
 
     const toggleFavorite = async () => {
         if (isAuthenticated) {
@@ -64,14 +108,6 @@ export default function PlaceDetails() {
     };
 
     useEffect(() => {
-        if (user) {
-            if (user.favoritos.includes(place.uid)) {
-                setIsFavorite(true);
-            }
-        }
-    }, [user]);
-
-    useEffect(() => {
         if (!!place) {
             setPlace(JSON.parse(localStorage.getItem("currentPlace")));
         }
@@ -85,6 +121,17 @@ export default function PlaceDetails() {
                 Math.abs(ref.current.getBoundingClientRect().top - 85) >=
                     ref.current.clientHeight,
             );
+
+            ["overview", "amenities", "location", "reviews"].forEach(
+                (section) => {
+                    const el = document.getElementById(section);
+                    el.style.paddingTop =
+                        el.getBoundingClientRect().top <= 35 &&
+                        section === isFocused
+                            ? "179px"
+                            : "35px";
+                },
+            );
         };
 
         document.addEventListener("scroll", handleScroll);
@@ -93,7 +140,7 @@ export default function PlaceDetails() {
         return () => {
             document.removeEventListener("scroll", handleScroll);
         };
-    }, [ref]);
+    }, [ref, isFocused, isTop]);
 
     const initialValues = {
         title: "",
@@ -144,22 +191,34 @@ export default function PlaceDetails() {
             >
                 <div className="flex overflow-x-scroll no_scrollbar mr-[15px]">
                     <Link href="#overview">
-                        <span className="flex items-center text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        <span
+                            className="flex items-center text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
+                            onClick={() => setIsFocused("overview")}
+                        >
                             Información
                         </span>
                     </Link>
                     <Link href="#amenities">
-                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        <span
+                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
+                            onClick={() => setIsFocused("amenities")}
+                        >
                             Comodidades
                         </span>
                     </Link>
                     <Link href="#location">
-                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        <span
+                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
+                            onClick={() => setIsFocused("location")}
+                        >
                             Localización
                         </span>
                     </Link>
                     <Link href="#reviews">
-                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
+                        <span
+                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
+                            onClick={() => setIsFocused("reviews")}
+                        >
                             Valoraciones
                         </span>
                     </Link>
@@ -187,9 +246,7 @@ export default function PlaceDetails() {
             </div>
             <section
                 id="overview"
-                className={`container mx-auto px-2 md:px-[50px] ${
-                    isTop ? "pt-[150px]" : "pt-[35px]"
-                }`}
+                className="container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
                 <p className="text-gray-500 mb-0">
                     {place.direccion}, {place.municipio}, {place.provincia}
@@ -244,9 +301,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="amenities"
-                className={`container mx-auto px-2 md:px-[50px] ${
-                    isTop ? "pt-[150px]" : "pt-[35px]"
-                }`}
+                className="container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
                 <h2 className="text-3xl">Comodidades</h2>
                 <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -271,9 +326,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="location"
-                className={`container mx-auto px-2 md:px-[50px] ${
-                    isTop ? "pt-[150px]" : "pt-[35px]"
-                }`}
+                className="container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
                 <h2 className="text-3xl">Localización</h2>
                 {place.GPS && (
@@ -300,9 +353,7 @@ export default function PlaceDetails() {
             </section>
             <section
                 id="reviews"
-                className={`container mx-auto px-1 md:px-[50px] ${
-                    isTop ? "pt-[150px]" : "pt-[35px]"
-                }`}
+                className="container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
                 <div className="flex flex-col items-center pb-[30px] mb-[50px] border-b-[1px] border-gray-300 sm:flex-row sm:justify-between">
                     <div className="mb-2 w-full inline-flex items-center justify-between sm:w-fit">
@@ -490,4 +541,70 @@ export default function PlaceDetails() {
             </section>
         </main>
     );
+}
+
+function SearchPlace({ places, q }) {
+    const { search, municipality } = useSelector((state) => state.filterBy);
+
+    const searchString = q ?? search;
+
+    let filteredPlaces;
+    if (searchString) {
+        filteredPlaces = places.filter(
+            (place) =>
+                place.nombre
+                    .toLowerCase()
+                    .includes(searchString.toLowerCase()) ||
+                place.municipio.toLowerCase() === searchString.toLowerCase() ||
+                place.provincia.toLowerCase() === searchString.toLowerCase(),
+        );
+    } else if (municipality) {
+        filteredPlaces = places.filter((place) => {
+            return place.municipio.toLowerCase() === municipality.toLowerCase();
+        });
+    } else {
+        filteredPlaces = places;
+    }
+
+    return (
+        <main className="container mx-auto mt-[100px] px-2 lg:px-8">
+            {filteredPlaces && filteredPlaces.length > 0 ? (
+                <>
+                    <h2 className="text-3xl pb-[50px] text-gray-800">
+                        Resultado de la búsqueda:
+                    </h2>
+                    <Places
+                        places={
+                            searchString || municipality
+                                ? filteredPlaces
+                                : places
+                        }
+                    />
+                </>
+            ) : (
+                <>
+                    <h2 className="text-3xl pb-[50px] text-gray-800">
+                        No hay resultados para la búsqueda, pero le sugerimos
+                        estos furanchos:
+                    </h2>
+                    <Places places={places} />
+                </>
+            )}
+        </main>
+    );
+}
+
+export async function getServerSideProps(context) {
+    try {
+        const places = await getAppProps();
+
+        return {
+            props: { isConnected: true, places },
+        };
+    } catch (e) {
+        console.error(e, "ERROR!!!");
+        return {
+            props: { isConnected: false, places: [] },
+        };
+    }
 }
