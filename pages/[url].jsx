@@ -14,6 +14,7 @@ import { showAuth, showMenu } from "../redux/actions/ui";
 import Gallery from "../base/Gallery/Gallery";
 import Places from "../base/Places";
 import { getAppProps } from "./_app";
+import { removeAccents } from "../lib/utils";
 import _ from "lodash";
 
 export default function Index({ places }) {
@@ -596,15 +597,20 @@ function SearchPlace({ places, q }) {
     if (searchString) {
         filteredPlaces = places.filter(
             (place) =>
-                place.nombre
+                removeAccents(place.nombre)
                     .toLowerCase()
-                    .includes(searchString.toLowerCase()) ||
-                place.municipio.toLowerCase() === searchString.toLowerCase() ||
-                place.provincia.toLowerCase() === searchString.toLowerCase(),
+                    .includes(removeAccents(searchString.toLowerCase())) ||
+                removeAccents(place.municipio.toLowerCase()) ===
+                    removeAccents(searchString.toLowerCase()) ||
+                removeAccents(place.provincia.toLowerCase()) ===
+                    removeAccents(searchString.toLowerCase()),
         );
     } else if (municipality) {
         filteredPlaces = places.filter((place) => {
-            return place.municipio.toLowerCase() === municipality.toLowerCase();
+            return (
+                removeAccents(place.municipio.toLowerCase()) ===
+                removeAccents(municipality.toLowerCase())
+            );
         });
     } else {
         filteredPlaces = places;
