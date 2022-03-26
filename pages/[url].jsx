@@ -29,6 +29,14 @@ export default function Index({ places }) {
         if (!!place) {
             return PlaceDetails(place);
         }
+    } else if (url.startsWith("Furancho")) {
+        const place = places.find((place) =>
+            place.nombre.toLowerCase().includes(url.toLowerCase()),
+        );
+
+        if (!!place) {
+            return PlaceDetails(place);
+        }
     } else if (url === "furancho" && !!q) {
         return SearchPlace({ places, q });
     }
@@ -53,8 +61,6 @@ function PlaceDetails(currentPlace) {
 
     //state for rating system track
     const [rate, setRate] = useState(5);
-
-    const [isFocused, setIsFocused] = useState("");
 
     useEffect(() => {
         if (!!currentPlace) {
@@ -108,6 +114,21 @@ function PlaceDetails(currentPlace) {
     };
 
     useEffect(() => {
+        const root = document.getElementById("__next");
+
+        root.classList.add("no_scrollbar");
+        root.style.overflowY = "scroll";
+        root.style.scrollPaddingTop = "144px";
+        root.style.maxHeight = "100vh";
+        root.style.scrollBehavior = "smooth";
+
+        return () => {
+            root.classList.remove("no_scrollbar");
+            root.removeAttribute("style");
+        };
+    });
+
+    useEffect(() => {
         if (!!place) {
             setPlace(JSON.parse(localStorage.getItem("currentPlace")));
         }
@@ -117,30 +138,22 @@ function PlaceDetails(currentPlace) {
         }
 
         const handleScroll = () => {
-            setIsTop(
-                Math.abs(ref.current.getBoundingClientRect().top - 85) >=
-                    ref.current.clientHeight,
-            );
-
-            ["overview", "amenities", "location", "reviews"].forEach(
-                (section) => {
-                    const el = document.getElementById(section);
-                    el.style.paddingTop =
-                        el.getBoundingClientRect().top <= 35 &&
-                        section === isFocused
-                            ? "179px"
-                            : "35px";
-                },
-            );
+            if (!!ref.current) {
+                setIsTop(
+                    Math.abs(ref.current.getBoundingClientRect().top) <= 85,
+                );
+            }
         };
 
-        document.addEventListener("scroll", handleScroll);
+        document
+            .getElementById("__next")
+            .addEventListener("scroll", handleScroll);
         handleScroll();
 
         return () => {
             document.removeEventListener("scroll", handleScroll);
         };
-    }, [ref, isFocused, isTop]);
+    }, [ref]);
 
     const initialValues = {
         title: "",
@@ -183,42 +196,31 @@ function PlaceDetails(currentPlace) {
 
     return (
         <main>
-            <Gallery ref={ref} />
+            <Gallery />
             <div
+                ref={ref}
                 className={`${
                     isTop ? "sticky z-10 top-[82px]" : ""
                 } w-full bg-white p-4 flex justify-between border-b-[1px] border-gray-300`}
             >
                 <div className="flex overflow-x-scroll no_scrollbar mr-[15px]">
                     <Link href="#overview">
-                        <span
-                            className="flex items-center text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
-                            onClick={() => setIsFocused("overview")}
-                        >
+                        <span className="flex items-center text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
                             Información
                         </span>
                     </Link>
                     <Link href="#amenities">
-                        <span
-                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
-                            onClick={() => setIsFocused("amenities")}
-                        >
+                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
                             Comodidades
                         </span>
                     </Link>
                     <Link href="#location">
-                        <span
-                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
-                            onClick={() => setIsFocused("location")}
-                        >
+                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
                             Localización
                         </span>
                     </Link>
                     <Link href="#reviews">
-                        <span
-                            className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue"
-                            onClick={() => setIsFocused("reviews")}
-                        >
+                        <span className="flex items-center my-1 text-lg px-2 md:mx-4 md:my-0 cursor-pointer text-black hover:text-brand-blue">
                             Valoraciones
                         </span>
                     </Link>
@@ -246,7 +248,7 @@ function PlaceDetails(currentPlace) {
             </div>
             <section
                 id="overview"
-                className="container mx-auto px-2 md:px-[50px] pt-[35px]"
+                className="snap-start container mx-auto px-2 md:px-[50px] pt-[35px]"
             >
                 <h2 className="text-3xl">{place.nombre}</h2>
                 <div className="text-gray-500 mb-4">

@@ -6,7 +6,6 @@ import { updateFavorites } from "../data/api/user/services";
 import Image from "next/image";
 import { login } from "../redux/actions/auth";
 import { showAuth, showMenu } from "../redux/actions/ui";
-import { stringToSlug } from "../lib/utils";
 import _ from "lodash";
 
 export default function Place({ place, favorite, inMap = false }) {
@@ -16,7 +15,7 @@ export default function Place({ place, favorite, inMap = false }) {
     const { isAuthenticated, user, token } = useSelector((state) => state.auth);
 
     const goToPlace = () => {
-        const placePath = `/${stringToSlug(place.nombre)}`;
+        const placePath = `/${encodeURIComponent(place.nombre)}`;
 
         dispatch(setCurrentPlace({ ...place, favorite }));
         localStorage.setItem(

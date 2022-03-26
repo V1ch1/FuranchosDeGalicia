@@ -3,7 +3,7 @@
 @import "../components/Select/select.css";
 @import "../base/Gallery/gallery.css";
 
-#_next {
+#__next {
     overflow: hidden;
 }
 
