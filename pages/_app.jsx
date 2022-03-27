@@ -24,7 +24,9 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     useEffect(() => {
-        TagManager.initialize({ gtmId: "GTM-W33K4MG" });
+        TagManager.initialize({
+            gtmId: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER,
+        });
     }, []);
 
     return (
