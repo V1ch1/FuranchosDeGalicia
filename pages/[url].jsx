@@ -22,17 +22,9 @@ export default function Index({ places }) {
     const { q, url } = router.query;
 
     if (url.startsWith("furancho-")) {
-        const placeName = url.replace("furancho-", "").trim();
-        const place = places.find((place) =>
-            place.nombre.toLowerCase().includes(placeName.toLowerCase()),
-        );
-
-        if (!!place) {
-            return PlaceDetails(place);
-        }
-    } else if (url.startsWith("Furancho")) {
-        const place = places.find((place) =>
-            place.nombre.toLowerCase().includes(url.toLowerCase()),
+        const placeName = url.replaceAll("-", " ").trim();
+        const place = places.some(
+            (place) => place.nombre.toLowerCase() === placeName.toLowerCase(),
         );
 
         if (!!place) {
