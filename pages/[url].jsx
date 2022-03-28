@@ -23,7 +23,7 @@ export default function Index({ places }) {
 
     if (url.startsWith("furancho-")) {
         const placeName = url.replaceAll("-", " ").trim();
-        const place = places.some(
+        const place = places.find(
             (place) => place.nombre.toLowerCase() === placeName.toLowerCase(),
         );
 
