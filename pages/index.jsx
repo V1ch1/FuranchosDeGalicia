@@ -21,7 +21,7 @@ export default function Index({
     const goToMunicipalitiesPlaces = (value) => {
         dispatch(filterByMunicipality(value));
 
-        router.push(`/furancho?q=${encodeURIComponent(value)}`);
+        router.push(`/furancho?q=${encodeURIComponent(value.toLowerCase())}`);
     };
 
     return (
