@@ -82,6 +82,7 @@ export default function Header({ isHome, areThereTabernas }) {
                         <div className="inline-flex cursor-pointer">
                             <Image
                                 width={30}
+                                alt="Logo Furanchos en Galicia"
                                 height={30}
                                 layout="fixed"
                                 src={`/images/${

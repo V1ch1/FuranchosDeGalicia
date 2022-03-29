@@ -8,7 +8,12 @@ export default function Footer({ areThereTabernas }) {
         >
             <Link href="/" scroll={false}>
                 <div className="inline-flex cursor-pointer">
-                    <Image width={30} height={30} src="/images/logo.svg" />
+                    <Image
+                        width={30}
+                        height={30}
+                        src="/images/logo.svg"
+                        alt="Logo Furanchos en Galicia"
+                    />
                     <span className="text-brand-blue text-xl font-bold ml-2 md:text-2xl hover:text-blue-500">
                         FuranchosEnGalicia
                     </span>
